@@ -5,16 +5,34 @@ const MovieSchema = new Schema({
     director_id: Schema.Types.ObjectId,
     title: {
         type: String,
-        required: true
+        required: [true, '`{PATH}` alanı zorunludur.'],
+        maxlength: [25, ' `{PATH}` alanı (`{VALUE}`), ({MAXLENGTH}) karakterinden küçük olmalıdır.'],
+        minlength: [2, ' `{PATH}` alanı (`{VALUE}`), ({MINLENGTH}) karakterinden büyük olmalıdır.']
     },
-    category: String,
-    country: String,
-    year: Number,
-    imdb_score: Number,
+    category:{
+        type: String,
+        maxlength: 30,
+        minlength: 1
+    },
+    country: {
+        type: String,
+        maxlength: 30,
+        minlength: 1
+    },
+    year: {
+        type: Number,
+        max:2021,
+        min:1900
+    },
+    imdb_score: {
+        type: Number,
+        max: 10,
+        min: 0
+    },
     createdAt:{
         type: Date,
         default: Date.now
     }
-});
+}); 
 
 module.exports = mongoose.model('movie', MovieSchema);
