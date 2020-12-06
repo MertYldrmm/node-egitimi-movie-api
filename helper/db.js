@@ -5,7 +5,7 @@ module.exports = () => {
     true, useUnifiedTopology: true, useCreateIndex: true });
     
     mongoose.connection.on('open', () => {
-        console.log('MongoDB: Connected');
+        //console.log('MongoDB: Connected');
     });
     mongoose.connection.on('error', (err) => {
         console.log('MongoDB: Error', err);
