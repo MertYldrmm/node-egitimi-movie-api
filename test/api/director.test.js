@@ -34,9 +34,9 @@ describe('/api/directors tests', () => {
     describe('/POST director', () => {
         it('it should POST a director', (done) => {
             const director = {
-                name: 'Sabahattin',
-                surname: 'Ali',
-                bio: "Eğridere'de doğan Sabahattin Ali, ilk hikâye ve şiir denemelerine Balıkesir'de başladıktan sonra İstanbul'daki edebiyat öğretmeni Ali Canip Yöntem'in desteğiyle ilk kez Akbaba ve Çağlayan dergilerinde şiirlerini yayımladı."
+                name: 'Mehmet',
+                surname: 'Can',
+                bio: "lorem"
             };
 
             chai.request(server)
@@ -67,5 +67,30 @@ describe('/api/directors tests', () => {
                 });
         });
     });
+
+    describe('/PUT/:director_id director', () => {
+        it('it should UPDATE a director given by id', (done) => {
+            const director = {
+                name: 'Ali',
+                surname : 'Mert',
+                bio: 'lorem 2',
+            };
+
+            chai.request(server)
+                .put('/api/directors/'+ directorId)
+                .send(director)
+                .set('x-access-token', token)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('name').eql(director.name);
+                    res.body.should.have.property('surname').eql(director.surname);
+                    res.body.should.have.property('bio').eql(director.bio);         
+                    done();
+                });
+        });
+    });
+
+
 
 });
