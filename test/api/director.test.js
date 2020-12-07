@@ -55,4 +55,17 @@ describe('/api/directors tests', () => {
         });
     });
 
+    describe('/GET/:director_id director', () => {
+        it('it should GET a director by the given id', (done) => {
+            chai.request(server)
+                .get('/api/directors/'+ directorId)
+                .set('x-access-token', token)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('array');
+                    done();
+                });
+        });
+    });
+
 });
