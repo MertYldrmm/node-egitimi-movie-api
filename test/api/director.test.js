@@ -36,7 +36,7 @@ describe('/api/directors tests', () => {
             const director = {
                 name: 'Mehmet',
                 surname: 'Can',
-                bio: "lorem"
+                bio: 'lorem'
             };
 
             chai.request(server)
