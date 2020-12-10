@@ -13,6 +13,9 @@ describe('/api/directors tests', () => {
             .post('/authenticate')
             .send({ username: 'mert', password: '123456'})
             .end((err, res) => {
+                if(err)
+                    throw err;
+                
                 token = res.body.token;
                 done();
             });
@@ -24,6 +27,9 @@ describe('/api/directors tests', () => {
                 .get('/api/directors')
                 .set('x-access-token', token)
                 .end((err, res) => {
+                    if(err)
+                        throw err;
+
                     res.should.have.status(200);
                     res.body.should.be.a('array');
                     done();
@@ -44,6 +50,9 @@ describe('/api/directors tests', () => {
                 .send(director)
                 .set('x-access-token', token)
                 .end((err, res) => {
+                    if(err)
+                        throw err;
+
                     res.should.have.status(200);
                     res.body.should.be.a('object');
                     res.body.should.have.property('name');
@@ -61,7 +70,10 @@ describe('/api/directors tests', () => {
                 .get('/api/directors/'+ directorId)
                 .set('x-access-token', token)
                 .end((err, res) => {
-                    res.should.have.status(200);
+                    if(err)
+                        throw err;
+                    
+                        res.should.have.status(200);
                     res.body.should.be.a('array');
                     done();
                 });
@@ -73,7 +85,7 @@ describe('/api/directors tests', () => {
             const director = {
                 name: 'Ali',
                 surname : 'Mert',
-                bio: 'lorem 2',
+                bio: 'lorem 2'
             };
 
             chai.request(server)
@@ -81,6 +93,9 @@ describe('/api/directors tests', () => {
                 .send(director)
                 .set('x-access-token', token)
                 .end((err, res) => {
+                    if(err)
+                        throw err;
+                    
                     res.should.have.status(200);
                     res.body.should.be.a('object');
                     res.body.should.have.property('name').eql(director.name);
@@ -98,6 +113,9 @@ describe('/api/directors tests', () => {
                 .delete('/api/directors/'+ directorId)
                 .set('x-access-token', token)
                 .end((err, res) => {
+                    if(err)
+                        throw err;
+                    
                     res.should.have.status(200);
                     res.body.should.be.a('object');
                     res.body.should.have.property('status').eql(1);
