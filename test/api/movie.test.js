@@ -57,6 +57,7 @@ describe('/api/movies tests', () => {
                     res.body.should.have.property('year');
                     res.body.should.have.property('imdb_score');
                     movieId = res.body._id;
+                    //console.log("POST Method");
                     done();
                 });
         });
@@ -77,6 +78,7 @@ describe('/api/movies tests', () => {
                     res.body.should.have.property('year');
                     res.body.should.have.property('imdb_score');
                     res.body.should.have.property('_id').eql(movieId);
+                    //console.log("/GET/:movie_id Method");
                     done();
                 });
         });
@@ -106,7 +108,7 @@ describe('/api/movies tests', () => {
                     res.body.should.have.property('country').eql(movie.country);
                     res.body.should.have.property('year').eql(movie.year);
                     res.body.should.have.property('imdb_score').eql(movie.imdb_score);
-                    
+                    //console.log("/PUT/:movie_id method");
                     done();
                 });
         });
@@ -122,6 +124,7 @@ describe('/api/movies tests', () => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
                     res.body.should.have.property('status').eql(1);
+                    //console.log("/DELETE/:movie_id method");
                     done();
                 });
         });
